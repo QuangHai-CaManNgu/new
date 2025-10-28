@@ -239,11 +239,11 @@ function MovieDetail({ user, onOpenAuth }) {
 
       {/* Trailer Section */}
       <div className="max-w-7xl mx-auto px-4 mb-12">
-        <h2 className="text-3xl font-bold mb-6 flex items-center">
-          <PlayCircle className="w-8 h-8 mr-3 text-purple-400" />
-          Trailer
-        </h2>
-        <div className="glass-effect rounded-2xl overflow-hidden" style={{ aspectRatio: '16/9' }}>
+        <div className="flex items-center gap-4 mb-6">
+          <PlayCircle className="w-10 h-10 text-purple-400" />
+          <h2 className="text-4xl font-black">Trailer</h2>
+        </div>
+        <div className="glass-effect rounded-3xl overflow-hidden glow-effect p-2" style={{ aspectRatio: '16/9' }}>
           <iframe
             width="100%"
             height="100%"
@@ -252,6 +252,7 @@ function MovieDetail({ user, onOpenAuth }) {
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
+            className="rounded-2xl"
             data-testid="movie-trailer"
           ></iframe>
         </div>
