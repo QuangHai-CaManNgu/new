@@ -49,6 +49,10 @@ Live: https://screenhub-130.preview.emergentagent.com
 
 ## 📦 Cài đặt
 
+Bạn có thể xem mã nguồn tại GitHub: https://github.com/QuangHai-CaManNgu/new
+
+Và thử nghiệm bản demo tại: https://screenhub-130.preview.emergentagent.com
+
 ### Backend
 ```bash
 cd backend
