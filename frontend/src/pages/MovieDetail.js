@@ -147,75 +147,91 @@ function MovieDetail({ user, onOpenAuth }) {
 
   return (
     <div className="min-h-screen pb-20">
-      {/* Back Button */}
-      <div className="max-w-7xl mx-auto px-4 pt-24 pb-4">
-        <Button
-          variant="ghost"
-          onClick={() => navigate(-1)}
-          className="text-white hover:bg-white/10"
-          data-testid="back-btn"
+      {/* Hero Background */}
+      <div className="relative h-[60vh] overflow-hidden mb-8">
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${movie.poster_url})` }}
         >
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Quay lại
-        </Button>
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0a0e27]/70 via-[#0a0e27]/90 to-[#0a0e27]" />
+        </div>
+        
+        {/* Back Button */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 pt-24">
+          <Button
+            variant="ghost"
+            onClick={() => navigate(-1)}
+            className="text-white hover:bg-white/20 glass-effect border border-white/10 h-12 px-6 rounded-xl"
+            data-testid="back-btn"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Quay lại
+          </Button>
+        </div>
       </div>
 
       {/* Movie Header */}
-      <div className="max-w-7xl mx-auto px-4 mb-12">
+      <div className="max-w-7xl mx-auto px-4 -mt-40 relative z-20 mb-12">
         <div className="grid md:grid-cols-3 gap-8">
           {/* Poster */}
           <div className="md:col-span-1">
-            <img
-              src={movie.poster_url}
-              alt={movie.title}
-              className="w-full rounded-2xl shadow-2xl"
-              data-testid="movie-poster"
-            />
+            <div className="relative group">
+              <img
+                src={movie.poster_url}
+                alt={movie.title}
+                className="w-full rounded-3xl shadow-2xl border-4 border-white/10 group-hover:border-purple-500/50 transition-all"
+                data-testid="movie-poster"
+              />
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-t from-purple-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            </div>
           </div>
 
           {/* Movie Info */}
           <div className="md:col-span-2 space-y-6">
-            <div>
-              <h1 className="text-4xl sm:text-5xl font-bold mb-4" data-testid="movie-title">
+            <div className="glass-effect rounded-3xl p-8 glow-effect">
+              <h1 className="text-5xl sm:text-6xl font-black mb-6 gradient-text glow-text" data-testid="movie-title">
                 {movie.title}
               </h1>
               
-              <div className="flex flex-wrap gap-2 mb-4">
+              <div className="flex flex-wrap gap-3 mb-6">
                 {movie.genre.map((g) => (
-                  <Badge key={g} variant="secondary" className="bg-purple-500/20 text-purple-300">
+                  <span key={g} className="category-badge text-sm">
                     {g}
-                  </Badge>
+                  </span>
                 ))}
               </div>
 
-              <div className="flex flex-wrap items-center gap-4 text-gray-300 mb-6">
-                <div className="flex items-center">
-                  <Star className="w-5 h-5 text-yellow-400 mr-1 fill-yellow-400" />
-                  <span className="font-semibold" data-testid="movie-rating">{movie.rating_avg.toFixed(1)}</span>
-                  <span className="text-sm ml-1">({movie.rating_count} đánh giá)</span>
+              <div className="flex flex-wrap items-center gap-6 text-gray-300 mb-6">
+                <div className="flex items-center gap-2 bg-yellow-400/10 px-4 py-2 rounded-xl border border-yellow-400/20">
+                  <Star className="w-6 h-6 text-yellow-400 fill-yellow-400" />
+                  <span className="font-bold text-xl" data-testid="movie-rating">{movie.rating_avg.toFixed(1)}</span>
+                  <span className="text-sm text-gray-400">({movie.rating_count})</span>
                 </div>
-                <div className="flex items-center">
-                  <Clock className="w-5 h-5 mr-1" />
-                  <span>{movie.duration} phút</span>
+                <div className="flex items-center gap-2">
+                  <Clock className="w-5 h-5 text-purple-400" />
+                  <span className="font-semibold">{movie.duration} phút</span>
                 </div>
-                <span className="px-3 py-1 bg-white/10 rounded-full text-sm">{movie.year}</span>
+                <span className="px-4 py-2 bg-purple-500/20 rounded-xl text-sm font-bold border border-purple-500/30">{movie.year}</span>
               </div>
-            </div>
 
-            <p className="text-lg text-gray-300 leading-relaxed" data-testid="movie-description">
-              {movie.description}
-            </p>
+              <p className="text-lg text-gray-300 leading-relaxed mb-6" data-testid="movie-description">
+                {movie.description}
+              </p>
 
-            <div className="flex gap-4">
-              <Button
-                onClick={toggleFavorite}
-                variant="outline"
-                className={`border-2 ${isFavorite ? 'bg-red-500/20 border-red-500 text-red-400' : 'border-white/20 text-white hover:bg-white/10'}`}
-                data-testid="favorite-btn"
-              >
-                <Heart className={`w-5 h-5 mr-2 ${isFavorite ? 'fill-red-400' : ''}`} />
-                {isFavorite ? 'Đã yêu thích' : 'Yêu thích'}
-              </Button>
+              <div className="flex gap-4">
+                <Button
+                  onClick={toggleFavorite}
+                  className={`h-14 px-8 rounded-2xl font-bold transition-all ${
+                    isFavorite 
+                      ? 'bg-gradient-to-r from-red-500 to-pink-500 hover:shadow-lg hover:shadow-red-500/50' 
+                      : 'bg-white/10 hover:bg-white/20 border-2 border-white/20'
+                  }`}
+                  data-testid="favorite-btn"
+                >
+                  <Heart className={`w-5 h-5 mr-2 ${isFavorite ? 'fill-current' : ''}`} />
+                  {isFavorite ? 'Đã yêu thích' : 'Yêu thích'}
+                </Button>
+              </div>
             </div>
           </div>
         </div>
