@@ -260,25 +260,28 @@ function MovieDetail({ user, onOpenAuth }) {
 
       {/* Reviews Section */}
       <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-6">Đánh Giá</h2>
+        <h2 className="text-4xl font-black mb-8 flex items-center">
+          <Star className="w-10 h-10 mr-3 text-yellow-400 fill-yellow-400" />
+          Đánh Giá
+        </h2>
         
         {/* Review Form */}
         {user && (
-          <Card className="glass-effect border-white/10 p-6 mb-8" data-testid="review-form">
-            <h3 className="text-xl font-semibold mb-4">Viết đánh giá của bạn</h3>
+          <Card className="glass-effect border-white/10 p-8 mb-8 rounded-3xl glow-effect" data-testid="review-form">
+            <h3 className="text-2xl font-bold mb-6">Viết đánh giá của bạn</h3>
             
-            <div className="mb-4">
-              <label className="block text-sm font-medium mb-2">Đánh giá của bạn</label>
-              <div className="flex gap-2">
+            <div className="mb-6">
+              <label className="block text-sm font-semibold mb-3 text-gray-300">Đánh giá của bạn</label>
+              <div className="flex gap-3">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <button
                     key={star}
                     onClick={() => setRating(star)}
-                    className="focus:outline-none transition-transform hover:scale-110"
+                    className="focus:outline-none transition-all hover:scale-125"
                     data-testid={`rating-star-${star}`}
                   >
                     <Star
-                      className={`w-8 h-8 ${star <= rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-500'}`}
+                      className={`w-10 h-10 ${star <= rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-600'}`}
                     />
                   </button>
                 ))}
@@ -289,11 +292,12 @@ function MovieDetail({ user, onOpenAuth }) {
               placeholder="Chia sẻ suy nghĩ của bạn về bộ phim..."
               value={comment}
               onChange={(e) => setComment(e.target.value)}
-              className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 mb-4 min-h-32"
+              className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 mb-6 min-h-32 rounded-2xl text-lg"
               data-testid="review-textarea"
             />
 
-            <Button onClick={submitReview} className="btn-primary" data-testid="submit-review-btn">
+            <Button onClick={submitReview} className="btn-primary h-14 px-8 text-lg" data-testid="submit-review-btn">
+              <Star className="w-5 h-5 mr-2" />
               Gửi đánh giá
             </Button>
           </Card>
